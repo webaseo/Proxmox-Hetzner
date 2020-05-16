@@ -56,7 +56,7 @@ export LC_ALL="C"
 
 installimage_bin="/root/.oldroot/nfs/install/installimage"
 
-MY_HOSTNAME="$1"
+MY_HOSTNAME="pve.awitt.de"
 if [ "$MY_HOSTNAME" == "" ]; then
   echo "Please set a hostname"
   echo "$0 host.name"
@@ -242,7 +242,7 @@ if [ ! -f $installimage_file ] ; then
 fi
 
 #fetching post install
-curl "https://raw.githubusercontent.com/hetzneronline/installimage/master/post-install/proxmox5" --output /post-install
+curl "https://raw.githubusercontent.com/hetzneronline/installimage/master/post-install/proxmox6" --output /post-install
 
 #Customising post install file
 echo "wget https://raw.githubusercontent.com/extremeshok/xshok-proxmox/master/install-post.sh -c -O install-post.sh && bash install-post.sh && rm install-post.sh" >> /post-install
@@ -253,9 +253,9 @@ if grep -q '#!/bin/bash' "/post-install"; then
 
   if [ "$USE_LVM" == "TRUE" ]; then
     echo "Using LVM"
-    $installimage_bin -a -i "$installimage_file" -g -s en -x /post-install -n "${MY_HOSTNAME}" -b grub -d "sda${MY_RAID_SLAVE}" -r "${MY_RAID_ENABLE}" -l "${MY_RAID_LEVEL}" -p "/boot:ext3:${MY_BOOT}G,/:ext4:${MY_ROOT}G${MY_SWAP}${MY_CACHE}${MY_SLOG},lvm:vg0:all" -v "vg0:data:/var/lib/vz:xfs:all"
+    $installimage_bin -a -i "$installimage_file" -g -s en -x /post-install -n "${MY_HOSTNAME}" -b grub -d "sda${MY_RAID_SLAVE}" -r "${MY_RAID_ENABLE}" -l "${MY_RAID_LEVEL}" -p "/boot:ext4:${MY_BOOT}G,/:ext4:${MY_ROOT}G${MY_SWAP}${MY_CACHE}${MY_SLOG},lvm:vg0:all" -v "vg0:data:/var/lib/vz:xfs:all"
   else
-    $installimage_bin -a -i "$installimage_file" -g -s en -x /post-install -n "${MY_HOSTNAME}" -b grub -d "sda${MY_RAID_SLAVE}" -r "${MY_RAID_ENABLE}" -l "${MY_RAID_LEVEL}" -p "/boot:ext3:${MY_BOOT}G,/:ext4:${MY_ROOT}G${MY_SWAP}${MY_CACHE}${MY_SLOG},/var/lib/vz:xfs:all"
+    $installimage_bin -a -i "$installimage_file" -g -s en -x /post-install -n "${MY_HOSTNAME}" -b grub -d "sda${MY_RAID_SLAVE}" -r "${MY_RAID_ENABLE}" -l "${MY_RAID_LEVEL}" -p "/boot:ext4:${MY_BOOT}G,/:ext4:${MY_ROOT}G${MY_SWAP}${MY_CACHE}${MY_SLOG},/var/lib/vz:xfs:all"
   fi
 
 else
