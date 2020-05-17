@@ -51,7 +51,7 @@ USE_LVM="TRUE"
 ################################################################################
 
 # Set the local
-export LANG="en_US.UTF-8"
+export LANG="de_DE.UTF-8"
 export LC_ALL="C"
 
 installimage_bin="/root/.oldroot/nfs/install/installimage"
