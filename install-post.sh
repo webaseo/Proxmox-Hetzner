@@ -153,8 +153,8 @@ echo "alias reboot-quick='systemctl kexec'" >> /root/.bash_profile
 systemctl disable rpcbind
 systemctl stop rpcbind
 
-## Set Timezone to UTC and enable NTP
-timedatectl set-timezone UTC
+## Set Timezone to TEurope/Berlin and enable NTP
+timedatectl set-timezone Europe/Berlin
 cat <<EOF > /etc/systemd/timesyncd.conf
 [Time]
 NTP=0.pool.ntp.org 1.pool.ntp.org 2.pool.ntp.org 3.pool.ntp.org
